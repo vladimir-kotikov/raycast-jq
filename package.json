@@ -2,15 +2,15 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "raycast-jq",
   "title": "Jq",
-  "description": "Perform queries on JSON data using jq",
+  "description": "Run queries on Json data using jq",
   "icon": "extension-icon.png",
   "author": "vladimir-kotikov",
   "license": "MIT",
   "commands": [
     {
       "name": "run-query",
-      "title": "Query JSON Document",
-      "description": "Perform a query on JSON data. No direct use, can only be called from other commands",
+      "title": "Query Json",
+      "description": "Run a jq query on Json data from file or clipboard.",
       "mode": "view"
     }
   ],
