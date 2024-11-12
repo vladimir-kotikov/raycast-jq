@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Clipboard, Keyboard, List } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Icon, Keyboard, List } from "@raycast/api";
 import { useExec } from "@raycast/utils";
 import { useMemo, useState } from "react";
 import { ActionPickFile as ActionPickDocument } from "./components/ActionPickFile";
@@ -73,8 +73,8 @@ export default function Command() {
 
     const pasteJsonDocument = () => Clipboard.readText().then(initDocument);
     const loadJsonDocument = (fileName: string) => readFile(fileName, "utf-8").then(initDocument);
-    return [loadJsonDocument, pasteJsonDocument]
-  }, [setQuery, setJsonDocument])
+    return [loadJsonDocument, pasteJsonDocument];
+  }, [setQuery, setJsonDocument]);
 
   // Check if jq is available
   const { isLoading: isCheckingJq, data: jqPath } = useJq();
@@ -100,21 +100,29 @@ export default function Command() {
       <ActionPickDocument
         title="Open Json file"
         type="public.json"
+        icon={Icon.Folder}
         onSelect={loadJsonDocument}
         shortcut={Keyboard.Shortcut.Common.Open}
+        key="actionPickDocument"
       />
     );
 
     const actionPasteDocument = (
       <Action
         title="Paste Json from Clipboard"
+        icon={Icon.Clipboard}
         onAction={pasteJsonDocument}
         shortcut={{ key: "v", modifiers: ["cmd"] }}
+        key="actionPasteDocument"
       />
     );
 
-    const actionCopyResult = <Action.CopyToClipboard title="Copy Result" content={queryResult} />;
-    const actionCopyQuery = <Action.CopyToClipboard title="Copy Query" content={query} />;
+    const actionCopyResult = (
+      <Action.CopyToClipboard title="Copy Result" content={queryResult} key="actionCopyResult" />
+    );
+    const actionCopyQuery = (
+      <Action.CopyToClipboard title="Copy Query" content={query} key="actionCopyQuery" />
+    );
 
     const actions = [actionPickDocument, actionPasteDocument];
     if (queryResult) {
@@ -137,11 +145,16 @@ export default function Command() {
       actions={listActions}
       searchBarPlaceholder="Enter query..."
     >
-      {jsonDocument && (
+      {jsonDocument ? (
         <List.Item
           title="Current document"
           detail={<List.Item.Detail markdown={detailsContent} />}
           actions={listActions}
+        />
+      ) : (
+        <List.EmptyView
+          icon="icon-64-no-content.png"
+          description="No document opened. Open JSON file (⌘ + O) or paste document from clipboard (⌘ + V)"
         />
       )}
     </List>

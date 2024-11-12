@@ -3,15 +3,21 @@
   "name": "raycast-jq",
   "title": "Jq",
   "description": "Run queries on Json data using jq",
-  "icon": "extension-icon.png",
+  "icon": "icon-512.png",
   "author": "vladimir-kotikov",
   "license": "MIT",
+  "categories": [
+    "Applications",
+    "Data",
+    "Developer Tools"
+  ],
   "commands": [
     {
       "name": "run-query",
       "title": "Query Json",
       "description": "Run a jq query on Json data from file or clipboard.",
-      "mode": "view"
+      "mode": "view",
+      "icon": "icon-64.png"
     }
   ],
   "dependencies": {

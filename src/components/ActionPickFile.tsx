@@ -1,3 +1,5 @@
+// Credits to Federico Zivolo <https://github.com/FezVrasta/raycast-toolkit>
+
 import { Action } from "@raycast/api";
 import { runAppleScript } from "@raycast/utils";
 import { ComponentProps, useCallback } from "react";

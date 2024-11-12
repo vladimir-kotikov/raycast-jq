@@ -8,7 +8,7 @@ import * as path from "path";
 import { finished } from "stream/promises";
 import { promisify } from "util";
 
-const noop = () => { };
+const noop = () => {};
 const execAsync = promisify(execFile);
 const unlinkSilent = (p: string) => unlink(p).catch(noop);
 
@@ -52,13 +52,13 @@ export function useJq(): AsyncState<string> {
   return useCachedPromise(async () => {
     const toast = await showToast({
       title: "Checking if jq is available",
-      style: Toast.Style.Animated
+      style: Toast.Style.Animated,
     });
 
     try {
       const version = await ensureJq(JQ_EXEC);
       toast.style = Toast.Style.Success;
-      toast.title = "Found"
+      toast.title = "Found";
       toast.message = version;
       setTimeout(() => toast.hide(), 1000);
       return JQ_EXEC;
@@ -68,5 +68,4 @@ export function useJq(): AsyncState<string> {
       throw err;
     }
   }, []);
-
 }
